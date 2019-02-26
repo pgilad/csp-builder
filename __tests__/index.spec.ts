@@ -75,3 +75,64 @@ test('Adding multiple values to a multi value directive', () => {
 
     expect(csp.stringify()).toEqual("media-src 'self' www.google.com;");
 });
+
+test('Verify full usage using my own CSP', () => {
+    const csp = new CSP.Builder();
+
+    const analyticsDomain = 'www.google-analytics.com';
+    const ownDomain = 'www.giladpeleg.com';
+    const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
+
+    const extensiveSourceDirective = [
+        CSP.PredefinedSource.Self,
+        CSP.SchemaSource.Data,
+        analyticsDomain,
+        ownDomain,
+    ];
+    const regularSourceDirective = [CSP.PredefinedSource.Self, analyticsDomain, ownDomain];
+    const localSourceDirective = [CSP.PredefinedSource.Self, ownDomain];
+
+    csp.addDirective(new CSP.DefaultSource().addValue(regularSourceDirective))
+        .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
+        .addDirective(new CSP.ImageSource().addValue(extensiveSourceDirective))
+        .addDirective(new CSP.MediaSource().addValue(localSourceDirective))
+        .addDirective(new CSP.ObjectSource().addValue([CSP.PredefinedSource.None]))
+        .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
+        .addDirective(
+            new CSP.PrefetchSource().addValue([
+                CSP.PredefinedSource.Self,
+                analyticsDomain,
+                ownDomain,
+            ])
+        )
+        .addDirective(
+            new CSP.ScriptSource().addValue([
+                CSP.PredefinedSource.Self,
+                CSP.PredefinedSource.UnsafeInline,
+                analyticsDomain,
+                ownDomain,
+            ])
+        )
+        .addDirective(
+            new CSP.StyleSource().addValue([
+                CSP.PredefinedSource.Self,
+                CSP.PredefinedSource.UnsafeInline,
+                ownDomain,
+            ])
+        )
+        .addDirective(new CSP.WorkerSource().addValue(localSourceDirective))
+        .addDirective(new CSP.ReportUri().setValue(reportUri));
+
+    const expected = `default-src 'self' www.google-analytics.com www.giladpeleg.com;
+    font-src 'self' data: www.google-analytics.com www.giladpeleg.com;
+    img-src 'self' data: www.google-analytics.com www.giladpeleg.com;
+    media-src 'self' www.giladpeleg.com;
+    object-src 'none';
+    prefetch-src 'self' www.google-analytics.com www.giladpeleg.com;
+    script-src 'self' 'unsafe-inline' www.google-analytics.com www.giladpeleg.com;
+    style-src 'self' 'unsafe-inline' www.giladpeleg.com;
+    worker-src 'self' www.giladpeleg.com;
+    report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce;`;
+
+    expect(csp.stringify()).toMatch(expected.replace(/\s+/g, ' '));
+});

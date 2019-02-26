@@ -1,4 +1,5 @@
 # csp-builder
+
 > A builder tool to help generate CSPs in a type-safe way
 
 [![Travis (.org)](https://img.shields.io/travis/pgilad/csp-builder.svg?style=for-the-badge)](https://travis-ci.org/pgilad/csp-builder)
@@ -24,12 +25,60 @@ so I created this tool.
 
 ## Usage
 
-For now, see the [tests](./__tests__/index.spec.ts) on how to use this tool.
+```typescript
+import * as CSP from 'csp-builder';
+
+const csp = new CSP.Builder();
+
+const analyticsDomain = 'www.google-analytics.com';
+const ownDomain = 'www.giladpeleg.com';
+const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
+
+const extensiveSourceDirective = [
+    CSP.PredefinedSource.Self,
+    CSP.SchemaSource.Data,
+    analyticsDomain,
+    ownDomain,
+];
+const regularSourceDirective = [CSP.PredefinedSource.Self, analyticsDomain, ownDomain];
+const localSourceDirective = [CSP.PredefinedSource.Self, ownDomain];
+
+csp.addDirective(new CSP.DefaultSource().addValue(regularSourceDirective))
+    .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
+    .addDirective(new CSP.ImageSource().addValue(extensiveSourceDirective))
+    .addDirective(new CSP.MediaSource().addValue(localSourceDirective))
+    .addDirective(new CSP.ObjectSource().addValue([CSP.PredefinedSource.None]))
+    .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
+    .addDirective(
+        new CSP.PrefetchSource().addValue([CSP.PredefinedSource.Self, analyticsDomain, ownDomain])
+    )
+    .addDirective(
+        new CSP.ScriptSource().addValue([
+            CSP.PredefinedSource.Self,
+            CSP.PredefinedSource.UnsafeInline,
+            analyticsDomain,
+            ownDomain,
+        ])
+    )
+    .addDirective(
+        new CSP.StyleSource().addValue([
+            CSP.PredefinedSource.Self,
+            CSP.PredefinedSource.UnsafeInline,
+            ownDomain,
+        ])
+    )
+    .addDirective(new CSP.WorkerSource().addValue(localSourceDirective))
+    .addDirective(new CSP.ReportUri().setValue(reportUri));
+
+console.log(csp.stringify());
+```
+
+See more usages in the [tests](./__tests__/index.spec.ts)
 
 ## Future plans
 
 I've noticed there are possible optimizations to be done for the CSP, especially regarding deprecations and conciseness.
- 
+
 ## License
 
 MIT © [Gilad Peleg](https://www.giladpeleg.com)
