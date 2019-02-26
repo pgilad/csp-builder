@@ -10,7 +10,7 @@ cache:
         - node_modules
 script:
     - npm run verify
-    - git diff-index --quiet HEAD -- || echo "Something has changed";
+    - git diff-index --quiet HEAD -- || exit 1;
     - npm test
 notifications:
     email: false
