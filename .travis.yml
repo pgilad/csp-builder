@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+node_js:
+    - 8
+    - 9
+    - 10
+    - 11
+cache:
+    directories:
+        - node_modules
+script:
+    - npm run verify
+    - git diff-index --quiet HEAD -- || echo "Something has changed";
+    - npm test
+notifications:
+    email: false

@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+      "interface-name": false,
+      "array-type": false,
+      "object-literal-sort-keys": false,
+      "ordered-imports": {
+          "options": {
+              "grouped-imports": true
+          }
+      }
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+      "exclude": ["./pkg/**/*"]
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib/",
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "pretty": true,
+        "removeComments": false,
+        "rootDir": "src",
+        "strict": true,
+        "target": "es2018"
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "lib"],
+    "compileOnSave": false
+}

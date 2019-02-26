@@ -1,0 +1,60 @@
+{
+    "name": "csp-builder",
+    "version": "1.0.0",
+    "description": "A builder tool to help generate CSPs in a type-safe way",
+    "repository": "pgilad/csp-builder",
+    "scripts": {
+        "format": "prettier --write '{src,__tests__}/**/*.ts'",
+        "lint": "tslint '{src,__tests__}/**/*.ts' --fix",
+        "pika-pack": "pack build",
+        "pika-publish": "pack publish",
+        "test": "jest",
+        "typecheck": "tsc --noEmit",
+        "verify": "npm run format && npm run lint && npm run typecheck"
+    },
+    "keywords": [
+        "content-security-policy",
+        "csp",
+        "builder",
+        "generator",
+        "web",
+        "security"
+    ],
+    "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
+    "license": "MIT",
+    "engines": {
+        "node": ">=8.9"
+    },
+    "@pika/pack": {
+        "pipeline": [
+            [
+                "@pika/plugin-ts-standard-pkg",
+                {
+                    "exclude": [
+                        "__tests__/**/*",
+                        "lib/**/*"
+                    ]
+                }
+            ],
+            [
+                "@pika/plugin-build-node"
+            ],
+            [
+                "@pika/plugin-build-web"
+            ]
+        ]
+    },
+    "devDependencies": {
+        "@pika/pack": "^0.3.3",
+        "@pika/plugin-build-node": "^0.3.12",
+        "@pika/plugin-build-web": "^0.3.12",
+        "@pika/plugin-ts-standard-pkg": "^0.3.12",
+        "@types/jest": "^24.0.9",
+        "jest": "^24.1.0",
+        "prettier": "^1.16.4",
+        "ts-jest": "^24.0.0",
+        "tslint": "^5.13.0",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.3.3333"
+    }
+}

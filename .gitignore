@@ -1,0 +1,11 @@
+.idea/
+node_modules/
+npm-debug.log
+tmp/
+dist/
+docs/
+.vscode/
+.DS_Store
+package-lock.json
+pkg/
+coverage/
