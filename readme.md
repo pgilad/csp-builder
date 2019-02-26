@@ -23,6 +23,10 @@ true if you opt in to create the CSP manually.
 For that reason, I wanted a builder tool to help me with generating the string, in a type-safe way, but could not find one,
 so I created this tool.
 
+## Install
+
+`npm install --save-dev csp-builder`
+
 ## Usage
 
 ```typescript
