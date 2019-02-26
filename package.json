@@ -29,7 +29,11 @@
         "preset": "ts-jest",
         "testEnvironment": "node",
         "coverageDirectory": "./coverage/",
-        "collectCoverage": true
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "./src/**/*.ts"
+        ],
+        "coverageReporters": ["json", "lcov", "clover", "text-summary"]
     },
     "@pika/pack": {
         "pipeline": [
