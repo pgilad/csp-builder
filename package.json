@@ -1,6 +1,6 @@
 {
     "name": "csp-builder",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "A builder tool to help generate CSPs in a type-safe way",
     "repository": "pgilad/csp-builder",
     "scripts": {
