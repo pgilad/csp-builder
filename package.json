@@ -25,6 +25,10 @@
     "engines": {
         "node": ">=8.9"
     },
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node"
+    },
     "@pika/pack": {
         "pipeline": [
             [
