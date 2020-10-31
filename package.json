@@ -1,7 +1,7 @@
 {
     "name": "csp-builder",
     "version": "1.0.1",
-    "description": "A builder tool to help generate CSPs in a type-safe way",
+    "description": "A builder tool to help generate Content Security Policies in a type-safe way",
     "repository": "pgilad/csp-builder",
     "scripts": {
         "format": "prettier --write '{src,__tests__}/**/*.ts'",
