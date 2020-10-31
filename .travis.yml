@@ -1,12 +1,13 @@
 os: linux
 dist: focal
 language: node_js
-node_js: [10, 12, 14, 15]
+node_js: [15]
 cache: npm
 script:
     - npm run verify
-    - git diff-index --quiet HEAD --
+    - git diff-index HEAD
     - git diff-index --quiet HEAD -- || exit 1;
+    - npm run pika-pack
     - npm test
 notifications:
     email: false
