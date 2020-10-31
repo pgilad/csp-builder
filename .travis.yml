@@ -5,7 +5,7 @@ node_js: [15]
 cache: npm
 script:
     - npm run verify
-    - git diff-index HEAD
+    - git diff
     - git diff-index --quiet HEAD -- || exit 1;
     - npm run pika-pack
     - npm test
