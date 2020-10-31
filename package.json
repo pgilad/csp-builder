@@ -10,7 +10,8 @@
         "pika-publish": "pika publish",
         "test": "jest",
         "typecheck": "tsc --noEmit",
-        "verify": "npm run format && npm run lint && npm run typecheck"
+        "verify": "npm run format && npm run lint && npm run typecheck",
+        "version": "npx @pika/pack"
     },
     "keywords": [
         "content-security-policy",
