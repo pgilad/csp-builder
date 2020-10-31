@@ -22,7 +22,7 @@ export class Builder {
 
     public stringify() {
         return Array.from(this.directives.values())
-            .map(directive => directive.serialize())
+            .map((directive) => directive.serialize())
             .join(' ')
             .trim();
     }

@@ -1,14 +1,12 @@
+os: linux
+dist: focal
 language: node_js
-node_js: [8, 9, 10, 11, 12]
+node_js: [10, 12, 14, 15]
 cache: npm
 script:
     - npm run verify
-    - git diff-index --quiet HEAD -- || exit 1;
+    - git diff-index --quiet HEAD -- src/ __tests__/ || exit 1;
+    - npm run pika-pack
     - npm test
-after_success:
-    - codecov
 notifications:
     email: false
-env:
-    global:
-        secure: k2Bp9C/AfY7whtcsURvsDs3Ak81tcSc/tuubLZp0TSKt01qhSIbtOqQ/bEWb1h29y4bWpL66w+LvWaDt7L9SEKZc2fcF/kC9OZx2Fpcb4IHf9/sn5jgOGjNAs1gK5auZVYDvH2BFNlDy4kQMmOwP/L0zp06SjlHR2US/KZkVYGr+MLilKkCyxO7Idj/bcpkjWvdOI0tFcemHmOEESwqDvO8JZUJvBqs+fJHYCYzs0mZEEbFDgR8fdH6ccPKNCNncAUhrrIwkin9b3/kyswBTQqqnc/6kDFOLwd9oUYkaAUdhuW8scVqYbEELlF6d+MB6pfz0oDxez04SPvrg7GTuJn/UeQZuGUxU3iCRkI9f2NCpot1FiBRlNRCzmDJQHkQUMimwigUK21eknZkvZTCI069HEswzf6jk60qp4QVi2D8NWuE/MTOc5mPs+7Ie3ZqJfjKmBSZQTsQE0SSCjX6bcKk20p2l4LVXqBuNaRZpmtywb0aSIChYk6Mf3yR7J6i4/sCWUc211JYZZnvBUvmU0FqD1253TF55SekVJr7UP8YFcZnqe8UfZ8CgDfmI7hP7eYxcPXbf6Anqs9ZODWLS759dewDyMO/j6mTIxrgw/IqGguWyvXD3RFoxwRXLcjPy7PWFqivgHxVTIzSvXfWXKdZgoWChvI9Wzo8ikJx5KfQ=
