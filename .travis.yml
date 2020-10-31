@@ -5,6 +5,7 @@ node_js: [10, 12, 14, 15]
 cache: npm
 script:
     - npm run verify
+    - git diff-index --quiet HEAD --
     - git diff-index --quiet HEAD -- || exit 1;
     - npm test
 notifications:
