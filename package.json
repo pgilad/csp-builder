@@ -1,6 +1,6 @@
 {
     "name": "csp-builder",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "A builder tool to help generate Content Security Policies in a type-safe way",
     "repository": "pgilad/csp-builder",
     "scripts": {
